@@ -56,6 +56,11 @@ var ItemRow = React.createClass({
         this.props.product.total =  this.calculateTotal(this.props.product.price, this.props.product.quantity);
         this.setState({product: this.props.product});
     },
+    handleRowItemChange: function(newValue, oldValue, itemName) {
+        console.log("newValue, oldValue, itemName: ", newValue, oldValue, itemName);
+        this.props.product[itemName] = newValue;
+        this.setState({product: this.props.product});
+    },
     calculateTotal : function(price, quantity) {
         return price * quantity;
     },
@@ -66,35 +71,42 @@ var ItemRow = React.createClass({
                 {this.props.product.name}
             </span>;
         var total = this.calculateTotal(this.props.product.price, this.props.product.quantity);
+        var price = this.state.product['price'];
+        var quantity = this.state.product['quantity'];
+        console.log("price and quantity: ", price, quantity);
+        console.log("run the laborHour Utils: " + window.LaborHourUtils.testFirstFun());
         return (
             <tr>
                 <td>{name}</td>
-                <td>$<input type="text" value={this.state.product.price} onChange={this.handlePriceChange}/></td>
-                <td><input type='text' value={this.props.product.quantity} onChange={this.handleQuantityChange} /></td>
+                <td>$<ItemInputCell cellValue={price} cellName={'price'} onRowItemChange={this.handleRowItemChange}/></td>
+                <td><ItemInputCell cellValue={quantity} cellName={'quantity'} onRowItemChange={this.handleRowItemChange}/></td>
                 <td>{total}</td>
             </tr>
         );
     }
 });
 
-/*var ItemInputCell = React.createClass({
+var ItemInputCell = React.createClass({
+
+    getDefaultProps : function () {
+        return {
+            value: 0
+        }
+    },
+
+    handleCellChange : function(event) {
+        this.props.onRowItemChange(
+            this.refs.cellInput.value, this.props.cellValue, this.props.cellName
+        );
+    },
 
     render: function() {
-        return (<input type="text" value={this.state.product.price} onChange={this.handlePriceChange}/>);
+        return (<input type="text" defaultValue={this.props.cellValue} ref="cellInput" onBlur={this.handleCellChange} readOnly={false}/>);
     }
-});*/
+});
 
-var PRODUCTS = [
-    {category: 'Sporting Goods', price: '49.99', stocked: true, name: 'Football',quantity: '1', total:''},
-    {category: 'Sporting Goods', price: '9.99', stocked: true, name: 'Baseball',quantity: '1', total:''},
-    {category: 'Sporting Goods', price: '29.99', stocked: false, name: 'Basketball',quantity: '1', total:''},
-    {category: 'Electronics', price: '99.99', stocked: true, name: 'iPod Touch',quantity: '1', total:''},
-    {category: 'Electronics', price: '399.99', stocked: false, name: 'iPhone 5',quantity: '1', total:''},
-    {category: 'Electronics', price: '199.99', stocked: true, name: 'Nexus 7',quantity: '1', total:''},
-    {category: 'Electronics', price: '299.99', stocked: true, name: 'iPad 5',quantity: '1', total:''},
-];
 
 ReactDOM.render(
-    <ReactGrid products={PRODUCTS} />,
+    <ReactGrid products={window.LaborHourUtils.productList} />,
     document.getElementById('example')
 );

@@ -10,6 +10,7 @@
     <script src="lib/react/react-dom.js"></script>
     <script src="lib/babel/browser.min.js"></script>
     <script src="lib/react-bootstrap/react-bootstrap.min.js"></script>
+    <script src="src/cccFunction.js"></script>
 </head>
 <body>
 <div class="container">
@@ -18,5 +19,10 @@
     <button class="btn btn-primary" onclick="addProduct()">Add Item</button>
 </div>
 <script type="text/babel" src="src/react-category-grid-prototype.jsx"></script>
+<script>
+    function addProduct() {
+        window.LaborHourUtils.addProduct();
+    }
+</script>
 </body>
 </html>
