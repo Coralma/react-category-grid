@@ -9,25 +9,20 @@
     <script src="lib/react/react.js"></script>
     <script src="lib/react/react-dom.js"></script>
     <script src="lib/babel/browser.min.js"></script>
-    <script src="src/ccc-function.js"></script>
+    <script src="lib/react-bootstrap/react-bootstrap.min.js"></script>
+    <script src="src/prototype-function.js"></script>
 </head>
 <body>
-<style>
-    body{
-        font-size: 12px;
-        font-family: 'Microsoft YaHei', 'Arial', 'SimSun';
-    }
-</style>
-<div class="container-fluid">
+<div class="container">
     <h1>React Category Grid</h1>
-    <div id="lossItemGrid"></div>
+    <div id="example"></div>
     <button class="btn btn-primary" onclick="addProduct()">Add Item</button>
 </div>
-<script type="text/babel" src="src/react-category-grid.jsx"></script>
+<script type="text/babel" src="src/react-category-grid-prototype.jsx"></script>
 <script>
     function addProduct() {
-        window.reactCategoryGrid.addLossItemData(5);
-        window.lossItemGridRender();
+        window.LaborHourUtils.addProduct();
+        window.itemGridRender();
     }
 </script>
 </body>

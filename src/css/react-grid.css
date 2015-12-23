@@ -107,10 +107,11 @@
 .bs-grid input {
     border: none !important;
     background-color: transparent !important;
-    padding: 2px !important;
+    padding: 1px !important;
     height: 25px !important;
     font-size: 12px !important;
     box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.075);
+    width: 100%;
 }
 
 .bs-grid input[disabled] {
@@ -153,7 +154,11 @@
     background-color: transparent;
     cursor: pointer;
     -webkit-appearance: none;
-    width: 100%;
+    width: auto;
+}
+
+.bs-grid select::-ms-expand {
+    display: none;
 }
 
 .not-active {
